@@ -31,12 +31,12 @@ string BalancedParanthesis(string s)
         }
     }
 
-    if(st.empty())
+    if(!st.empty())
     {
-        return "YES";
+        return "NO";
     }
     else{
-        return "NO";
+        return "YES";
     }
 }
 
