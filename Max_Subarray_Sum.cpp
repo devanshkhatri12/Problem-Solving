@@ -14,6 +14,23 @@ void inputElements(vector<int>& arr, int n)
     cout<<endl;
 }
 
+// BETTER APPROACH
+int SubarraySum(vector<int>& arr, int n)
+{
+    int maxi = INT16_MIN;
+
+    for(int i=0; i<n; i++)
+    {
+        int sum = 0;
+        for(int j=i; j<n; j++)
+        {
+            sum += arr[j];
+            maxi = max(sum , maxi);
+        }
+    }
+    return maxi;
+}
+
 // BRUTEFORCE APPROACH
 int SubarraySum(vector<int>& arr, int n)
 {
