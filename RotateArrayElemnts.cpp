@@ -10,8 +10,7 @@ void inputElements(vector<int>& v)
     cout<<endl;
 }
 
-// Better Approach ->  TC - O(N) , SC - O(N)
-// Rotate Elements Left by Kth position
+// Brute Approach ->  TC - O(N) , SC - O(N)
 void rotateArrayLeft(vector<int>& v, int k)
 {
     int n = v.size();
@@ -23,6 +22,31 @@ void rotateArrayLeft(vector<int>& v, int k)
     }
 
     v = temp;                        // copy into original array
+}
+
+// Better Approach -> TC - O(N+K) , SC - O(K)
+void rotateArrayLeft(vector<int>&v , int k)
+{
+    int n = v.size();
+    vector<int> temp(n);
+    k = k%n;
+
+    for(int i=0; i<k; i++)
+    {
+        temp[i] = v[i];
+    }
+
+    for(int i=k; i<n; i++)
+    {
+        v[i-k] = v[i];
+    }
+
+    int j=0;
+    for(int i=n-k; i<n; i++)
+    {
+        v[i] = temp[j];
+        j++;
+    }
 }
 
 int main()
