@@ -16,6 +16,30 @@ void rotateArrayRight(vector<int>& v, int k)
     v = temp;                        // copy into original array
 }
 
+// Better Approach -> TC - O(N+K) , SC - O(K)
+void rotateArrayRight(vector<int>&v , int k)
+{
+    int n = v.size();
+    vector<int> temp(n);
+    k = k%n;
+
+    int j=0;
+    for(int i=n-1; i>=k; i--)
+    {
+        temp[j] = v[i];
+        j++;
+    }
+
+    for(int i=0; i<k; i++)
+    {
+        v[k+i] = v[i];
+    }
+
+    for(int i=0; i<k; i++)
+    {
+        v[i] = temp[i];
+    }
+}
 
 int main()
 {
