@@ -49,6 +49,14 @@ void rotateArrayLeft(vector<int>&v , int k)
     }
 }
 
+// Optimal Approach -> TC - O(d) , SC - O(1)
+void rotateArrayLeft(int arr[], int n, int k)
+{
+    reverse(arr , arr+k);
+    reverse(arr+k , arr+n);
+    reverse(arr , arr+n);
+}
+
 int main()
 {
     int n;
