@@ -83,6 +83,27 @@ int missing(vector<int>& arr)
     return TotalSum - sum;
 }
 
+// Optimal approach - using XOR
+// Method-1 : TC - O(2N) , SC - O(1)
+int missing(vector<int>& arr)
+{
+    int n = arr.size();
+
+    int XOR1 = -1;
+    for(int i=n; i>=0; i--)
+    {
+        XOR1 = XOR1 ^ i;
+    }
+
+    int XOR2  = -1;
+    for(int i=0; i<n; i++)
+    {
+        XOR2 = XOR2 ^ arr[i];
+    }
+
+    return XOR1 ^ XOR2;
+}
+
 
 int main()
 {
