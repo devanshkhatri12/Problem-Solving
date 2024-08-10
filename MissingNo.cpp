@@ -41,12 +41,37 @@ int missing(vector<int>& arr)
         }
     }
     return n;
+}
+
+// Better approach - TC - O(2N) , SC - O(N)
+int missing(vector<int>& arr)
+{
+    int n = arr.size();
+
+    vector<int> hashArr(n+1, 0);
+
+    for(int i=0; i<n; i++)
+    {
+        hashArr[arr[i]] = -1;
+    }
+
+    for(int i=0; i<n; i++)
+    {
+        if(hashArr[i] != -1)
+        {
+            return i;
+            break;
+        }
+    }
+    return n;
 
 }
 
+
+
 int main()
 {
-    vector<int> arr = {3,0,1};
+    vector<int> arr = {1,2};
 
     cout<<"Missing no. is : "<<missing(arr)<<endl;
 
