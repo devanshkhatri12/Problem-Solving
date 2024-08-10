@@ -26,6 +26,24 @@ int missing(vector<int>& arr)
     return n;
 }
 
+// Better approach - TC - O(nlogn) , SC O(1)
+int missing(vector<int>& arr)
+{
+    int n = arr.size();
+
+    sort(arr.begin() , arr.end());
+
+    for(int i=0; i<n; i++)
+    {
+        if(arr[i] != i)
+        {
+            return i;
+        }
+    }
+    return n;
+
+}
+
 int main()
 {
     vector<int> arr = {3,0,1};
