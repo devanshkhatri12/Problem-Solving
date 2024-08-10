@@ -104,6 +104,24 @@ int missing(vector<int>& arr)
     return XOR1 ^ XOR2;
 }
 
+// method-2 : TC - O(N) , SC - O(1)
+int missing(vector<int>& arr)
+{
+    int n = arr.size();
+
+    int XOR1 = -1;
+    int XOR2 = -1;
+
+    for(int i=0; i<n; i++)
+    {
+        XOR1 = XOR1 ^ i;
+        XOR2 = XOR2 ^ arr[i];
+    }
+
+    XOR1 = XOR1 ^ n;
+    return XOR2 ^ XOR1;
+}
+
 
 int main()
 {
