@@ -67,11 +67,26 @@ int missing(vector<int>& arr)
 
 }
 
+// Optimal approach - TC - O(N) , SC - (1)
+int missing(vector<int>& arr)
+{
+    int n = arr.size();
+
+    int sum = 0;
+    int TotalSum = (n*(n+1))/2;
+
+    for(int i=0; i<n; i++)
+    {
+        sum += arr[i];
+    }
+
+    return TotalSum - sum;
+}
 
 
 int main()
 {
-    vector<int> arr = {1,2};
+    vector<int> arr = {3,0,1};
 
     cout<<"Missing no. is : "<<missing(arr)<<endl;
 
