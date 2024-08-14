@@ -33,6 +33,36 @@ vector<int> intersectionArrayElements(vector<int>& arr1, vector<int>& arr2)
 
 }
 
+// Optimal approach - TC- O(min(n,m)) , SC - O(n)
+vector<int> intersectionArrayElements(vector<int>& arr1, vector<int>& arr2)
+{
+    vector<int> ans;
+
+    int n = arr1.size();
+    int m =  arr2.size();
+
+    int i=0, j=0;
+
+    while(i<n && j<m)
+    {
+        if(arr1[i] == arr2[j])
+        {
+            ans.push_back(arr1[i]);
+            i++;
+            j++;
+        }
+        else if(arr1[i] < arr2[j])
+        {
+            i++;
+        }
+        else
+        {
+            j++;
+        }
+    }
+    return ans;
+}
+
 int main()
 {
     vector<int> arr1 = {1,2,2,3,3,4,5,6};
