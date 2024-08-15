@@ -77,6 +77,19 @@ int AppearOnce(vector<int>& arr)
     }
 }
 
+// Optimal approach - TC -O(N) , SC - O(1)
+int AppearOnce(vector<int>& arr)
+{
+    int n = arr.size();
+
+    int XOR = 0;
+    for(int i=0; i<n; i++)
+    {
+        XOR ^= arr[i];
+    }
+    return XOR;
+}
+
 int main()
 {
     vector<int> arr = {1,1,2,2,3,3,4,4,5};
