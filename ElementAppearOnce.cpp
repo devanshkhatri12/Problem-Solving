@@ -27,10 +27,38 @@ int AppearOnce(vector<int>& arr)
     return -1;
 }
 
+// Better approach - TC - O(3N) , SC- O(N)
+int AppearOnce(vector<int>& arr)
+{
+    int n = arr.size();
+    int maxi = 0;
+
+    for(int i=0; i<n; i++)
+    {
+        maxi = max(maxi, arr[i]);
+    }
+
+    vector<int> hashArr(maxi+1, 0);
+
+    for(int i=0; i<n; i++)
+    {
+        hashArr[arr[i]]++;
+    }
+
+    for(int i=0; i<n; i++)
+    {
+        if(hashArr[arr[i]] == 1)
+        {
+            return arr[i];
+            break;
+        }
+    }
+    return -1;
+}
 
 int main()
 {
-    vector<int> arr = {1,1,2,3,3,4,4};
+    vector<int> arr = {1,1,2,2,3,3,4,4,5};
 
     int ans = AppearOnce(arr);
 
