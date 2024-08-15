@@ -56,6 +56,27 @@ int AppearOnce(vector<int>& arr)
     return -1;
 }
 
+// Better appraoch - TC - O(n) + O(n/2+1) , SC - O(n/2+1)
+int AppearOnce(vector<int>& arr)
+{
+    int n = arr.size();
+
+    map<long long, int> mp;
+
+    for(int i=0; i<n; i++)
+    {
+        mp[arr[i]]++;
+    }
+
+    for(auto it : mp)
+    {
+        if(it.second == 1)
+        {
+            return it.first;
+        }
+    }
+}
+
 int main()
 {
     vector<int> arr = {1,1,2,2,3,3,4,4,5};
