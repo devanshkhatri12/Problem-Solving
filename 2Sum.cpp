@@ -43,6 +43,30 @@ vector<int> twoSum(vector<int>& arr, int target)
     return {-1, -1};
 }
 
+
+// Optimal approahc - TC - O(N) , SC - O(N)
+vector<int> twoSum(vector<int>& arr, int target)
+{
+    int n = arr.size();
+
+    map<int, int> mp;
+
+    for(int i=0; i<n; i++)
+    {
+        int element = arr[i];
+        int difference = target - element;
+
+        if(mp.find(difference) != mp.end())
+        {
+            return {mp[difference] , i};
+        }
+
+        mp[element] = i;
+    }
+
+    return {-1, -1};
+}
+
 int main()
 {
     int target;
