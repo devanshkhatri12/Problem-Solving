@@ -2,7 +2,30 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-// BBRUTE APPROACH - LOOPING
+// BETTER APPROACH - HASHING                TC -O(nlogn) + O(n) , SC - O(n)
+int majorityElement(vector<int> &v)
+{
+    int n = v.size();
+
+    map<int , int> mp;
+
+    for(int i=0 ;i<n; i++)
+    {
+        mp[v[i]]++;
+    }
+
+    for(auto it : mp)
+    {
+        if(it.second > n/2)
+        {
+            return it.first;
+            break;
+        }
+    }
+    return -1;
+}
+
+// BBRUTE APPROACH - LOOPING                TC - O(n^2) , SC -O(1)
 int majorityElement(vector<int> &v)
 {
     int n = v.size();
