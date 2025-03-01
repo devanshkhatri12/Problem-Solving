@@ -28,6 +28,21 @@ void printROW(int row)
 }
 
 
+// Optimal approach: TC - O(row) , SC - O(1)
+void printRow(int row)
+{
+    long long result  = 1;
+    cout<<result<<" ";
+    for(int col=1; col<row; col++)
+    {
+        result = result * (row - col);
+        result = result / (col);
+        cout<<result<<" ";
+    }
+    cout<<endl;
+}
+
+
 int main()
 {
     int row , col;
@@ -38,4 +53,7 @@ int main()
 
     cout<<"printing "<<row<<"th row"<<endl;
     printROW(row);
+
+    cout<<"printing "<<row<<"th row"<<endl;
+    printRow(row);
 }
