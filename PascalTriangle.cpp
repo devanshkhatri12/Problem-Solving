@@ -15,7 +15,17 @@ int nCr(int n, int r)
     return result;
 }
 
-// Variation 2 - print the nth row of pascal triangle
+// Variation 2 - Print the entire nth row of pascal triangle
+// Brute approach:  TC - O(n*r) , SC-O(1)
+void printROW(int row)
+{
+    // printing row
+    for(int col=1; col<=row; col++)
+    {
+        cout<<nCr(row-1, col-1)<<" ";
+    }
+    cout<<endl;
+}
 
 
 int main()
@@ -25,4 +35,7 @@ int main()
     cin>>row>>col;
 
     cout<<"The Element at position (row,col) is: "<<nCr(row-1, col-1)<<endl;
+
+    cout<<"printing "<<row<<"th row"<<endl;
+    printROW(row);
 }
