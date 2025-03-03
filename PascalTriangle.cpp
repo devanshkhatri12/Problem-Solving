@@ -43,6 +43,22 @@ void printRow(int row)
 }
 
 
+// Variation 3 - print entire pascal triangle
+// Brute approach : TC - O(n^3)
+void generate(int numRows) 
+{
+    int n = numRows;
+
+    for(int row=1; row<=n; row++)       // O(n)
+    {
+        for(int col=1; col<=row; col++)     // O(n)
+        {
+            cout<<nCr(row-1,col-1)<<" ";    //      O(n)
+        }
+        cout<<endl;
+    }
+}
+
 int main()
 {
     int row , col;
@@ -56,4 +72,7 @@ int main()
 
     cout<<"printing "<<row<<"th row"<<endl;
     printRow(row);
+
+    cout<<"printing Pascal triangle till the nth row"<<endl;
+    generate(row);
 }
