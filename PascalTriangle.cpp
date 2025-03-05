@@ -59,6 +59,29 @@ void generate(int numRows)
     }
 }
 
+// Optimal approacch: TC -O(n^2)
+vector<vector<int>> pascal(int numRows) {
+    vector<vector<int>> ans;
+
+    // we also wrote it as
+    for(int row=1; row<=numRows; row++)         //O(n)
+    {
+        long long result =1;
+        vector<int> ansRow;
+        ansRow.push_back(result);
+
+        for(int col=1; col<row; col++)              //O(n)
+        {
+            result  = result * (row - col);
+            result = result / col;
+            ansRow.push_back(result);
+        }
+        ans.push_back(ansRow);
+    }
+    return ans;
+}
+
+
 int main()
 {
     int row , col;
@@ -75,4 +98,19 @@ int main()
 
     cout<<"printing Pascal triangle till the nth row"<<endl;
     generate(row);
+
+    cout<<"printing Pascal triangle till the nth row"<<endl;
+    vector<vector<int>> ans = pascal(row);
+    for(auto it : ans)
+    {
+        for(auto elem : it)
+        {
+            cout<<elem<<" ";
+        }
+        cout<<endl;
+    }
+
+
+
+    
 }
