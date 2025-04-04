@@ -52,7 +52,7 @@ int main()
 
     int ans = kokoEat(arr,hour);
 
-    cout<<"Minimum integer to eat piles of banannas "<<ans<<endl;
+    cout<<"Minimum integer to eat piles of banannas git "<<ans<<endl;
 }
 
 
