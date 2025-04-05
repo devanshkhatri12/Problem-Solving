@@ -21,6 +21,8 @@ int findk(vector<int>& arr, int hour)
     
     return sum;
 }
+
+// Brute approach: TC - O(N^2) , SC - O(1)
 int kokoEat(vector<int>& arr, int k) {
     // Code here
     
@@ -40,6 +42,34 @@ int kokoEat(vector<int>& arr, int k) {
     return MAX;
 }
 
+// Optimal approach: TC -O(n*log(max(arr))) , SC -O(1)
+int kokoEat(vector<int>& arr, int k)
+{
+    int MAX = findMax(arr);
+    int ans =  MAX;
+
+    int low = 1; 
+    int high = MAX;
+    ans = INT_MAX;
+
+    while(low <= high)
+    {
+        int mid = low + (high-low)/2;
+
+        int totalHour = findk(arr,mid);
+
+        if(totalHour <= k){
+            ans = mid;
+            high = mid-1;
+        }
+        else{
+            low = mid+1;
+        }
+    }
+
+    return ans;
+}
+
 
 
 int main()
@@ -52,7 +82,7 @@ int main()
 
     int ans = kokoEat(arr,hour);
 
-    cout<<"Minimum integer to eat piles of banannas git "<<ans<<endl;
+    cout<<"Minimum integer to eat piles of banannas: "<<ans<<endl;
 }
 
 
