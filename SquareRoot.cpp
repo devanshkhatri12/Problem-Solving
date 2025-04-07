@@ -7,6 +7,26 @@ int NumSquare(int num)
     return floor(sqrt(num));
 }
 
+// Better approach: Liner search: TC - O(n) , SC- O(1)
+int NumSquare(int num)
+{
+    int ans = 0;
+
+    for(int i=1; i<=num; i++)
+    {
+        if((i*i) <= num)
+        {
+            ans= i;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    return ans;
+}
+
 
 int main()
 {
