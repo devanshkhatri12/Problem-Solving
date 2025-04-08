@@ -27,6 +27,28 @@ int NumSquare(int num)
     return ans;
 }
 
+// Optimal Approach: TC -O(logn) , SC - O(1);
+int NumSquare(int num)
+{
+    int low=1, high=num, ans=0;
+
+    while(low <= high)
+    {
+        int mid = low + (high - low)/2;
+
+        if((mid*mid) <= num)
+        {
+            ans = mid;
+            low = mid+1;
+        }
+        else
+        {
+            high = mid-1;
+        }
+    }
+
+    return ans;
+}
 
 int main()
 {
