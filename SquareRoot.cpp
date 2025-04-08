@@ -50,6 +50,18 @@ int NumSquare(int num)
     return ans;
 }
 
+// Optimal Approach: Using Newton Rapson method: TC -O(logn) , SC - O(1)
+int NumSquare(int num)
+{
+    long long x = num;
+
+    while((x*x) > num)
+    {
+        x = (x + (x/num) / 2);
+    }
+    return (x*x) == num;
+}
+
 int main()
 {
     int num;
