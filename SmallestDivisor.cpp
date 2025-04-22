@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+
 int maximum(vector<int>& nums)
 {
     int maxi = INT_MIN;
@@ -32,13 +33,48 @@ int Divisor(vector<int>& nums, int threshold, int maxi)
     return -1;
 }
 
+int possible(vector<int>& nums, int mid)
+{
+    int result=0;
+    for(int i=0; i<nums.size(); i++)
+    {
+        result += ceil(double(nums[i]) / double(mid));
+    }
+    return result;
+}
+
+// Optimal approach: TC -O(logn) , SC -O(1)
+int Divisor(vector<int>& nums, int threshold, int maxi)
+{
+    int mini = 1;
+    int ans = INT_MIN;
+
+    while(mini <= maxi)
+    {
+        int mid = mini + (maxi - mini)/2;
+
+        int result = possible(nums, mid);
+
+        if(result <= threshold)
+        {
+            ans = mid;
+            maxi = mid-1;
+        }
+        else{
+            mini = mid+1;
+        }
+    }
+
+    return ans;
+}
+
 int main()
 {
     int threshold;
     cout<<"enter the threshold number"<<endl;
     cin>>threshold;
 
-    vector<int> nums = {1,2,5,9};
+    vector<int> nums = {44,22,33,11,1};
 
     int maxi = maximum(nums);
 
