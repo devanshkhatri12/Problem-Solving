@@ -24,7 +24,7 @@ int evenlyDivides(int N){
 
 int main()
 {
-    int n; 
+    int n;
     cout<<"Enter no"<<endl;
     cin>>n;
 
