@@ -20,25 +20,49 @@ int findDays(vector<int>& weights , int capacity)
 
     return day;
 }
-
-
-// Brute approach: TC - O(n^2) , SC - O(1)
-int shipWithinDays(vector<int>& weights, int days)
+// Optimal approach: TC - O(logn) , SC - O(1)
+int shipWithinDays(vector<int>& weights , int days)
 {
     int maxi = *max_element(weights.begin() , weights.end());
     int sum = accumulate(weights.begin() , weights.end() , 0);
 
-    for(int i=maxi; i<=sum; i++)
+    int low = maxi, high = sum;
+    while(low <= high)
     {
-        int daysRequired = findDays(weights , i);
+        int mid = low + (high-low)/2;
+
+        int daysRequired = findDays(weights , mid);
 
         if(daysRequired <= days)
-        return i;
+        {
+            high = mid-1;
+        }
+        else
+        {
+            low = mid+1;
+        }
+        
     }
-
-    return -1;
-
+    return low;
 }
+
+// Brute approach: TC - O(n^2) , SC - O(1)
+// int shipWithinDays(vector<int>& weights, int days)
+// {
+//     int maxi = *max_element(weights.begin() , weights.end());
+//     int sum = accumulate(weights.begin() , weights.end() , 0);
+
+//     for(int i=maxi; i<=sum; i++)
+//     {
+//         int daysRequired = findDays(weights , i);
+
+//         if(daysRequired <= days)
+//         return i;
+//     }
+
+//     return -1;
+
+// }
 
 int main()
 {
