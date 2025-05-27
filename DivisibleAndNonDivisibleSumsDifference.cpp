@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+// Brute approach : TC - O(N) , SC -O(1)
+int Difference(int n, int m)
+{
+    int num1 = 0, num2=0;
+    for(int i=1; i<=n; i++)
+    {
+        if(i%m != 0)
+        {
+            num1 += i;
+        }
+        else
+        {
+            num2 += i;
+        }
+    }
+
+    return num1 - num2;
+}
+
+int main()
+{
+    int n , m;
+    cin>>n>>m;
+
+    int ans  = Difference(n,m);
+
+    cout<<"Sum of Divisible and Non-Divisible is: "<<ans<<endl;
+    
+}
