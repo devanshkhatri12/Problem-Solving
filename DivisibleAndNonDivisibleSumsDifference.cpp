@@ -20,6 +20,14 @@ int Difference(int n, int m)
     return num1 - num2;
 }
 
+// Optimal Approach: TC - O(1) , SC - O(1)
+int Difference(int n, int m)
+{
+    int k = n/m;
+
+    return (n * (n+1)/2) - (k * m * (m+1));
+}
+
 int main()
 {
     int n , m;
