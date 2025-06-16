@@ -19,6 +19,31 @@ int isPossible(vector<int>& arr, int pages)
     return studentCount;
 }
 
+// Optimal approach(Binary search): TC - O(logn) , SC - O(1)
+int allocateBooks(vector<int>& arr, int n, int students)
+{
+    int low = *max_element(arr.begin() , arr.end());
+    int high = accumulate(arr.begin() , arr.end(), 0);
+
+    while(low <= high)
+    {
+        int mid = low + (high-low)/2;
+
+        int validStudents = isPossible(arr, mid);
+
+        if(validStudents > students)
+        {
+            low = mid+1;
+        }
+        else{
+            high = mid-1;
+        }
+    }
+
+    return low;
+
+}
+
 // Brute approach(Linear search): TC - O((sum-max+1) * n) , SC: O(1)
 int allocateBooks(vector<int>& arr, int n, int students)
 {
@@ -42,9 +67,9 @@ int allocateBooks(vector<int>& arr, int n, int students)
 int main()
 {
 
-    int n = 5;
-    vector<int> arr = {25, 46, 28, 49, 24};
-    int students  = 4;
+    int n = 4;
+    vector<int> arr = {29, 40, 59, 70};
+    int students  = 3;
 
     int ans = allocateBooks(arr, n, students);
 
