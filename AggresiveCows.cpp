@@ -20,6 +20,35 @@ bool CountCows(vector<int>& stalls, int minDistance, int cows)
     return false;
 }
 
+// Optimal approach: TC - O(logn) , SC - O(1)
+int AggresiveCows(vector<int>& stalls, int cows)
+{
+    int n = stalls.size();
+
+    if(cows < 2)
+    return -1;
+
+    sort(stalls.begin() , stalls.end());
+
+    int low = 1;
+    int high = stalls[n-1] - stalls[0];
+
+    while(low <= high)
+    {
+        int mid = low + (high-low)/2;
+
+        if(CountCows(stalls, mid, cows) == true){
+            low = mid+1;
+        }
+        else{
+            high = mid-1;
+        }
+    }
+
+    return high;
+}
+
+// Brtue appraoch: TC - O(n^2) , SC - O(1)
 int AggresiveCows(vector<int>& stalls, int cows)
 {
     int n = stalls.size();
