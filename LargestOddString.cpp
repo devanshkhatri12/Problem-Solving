@@ -32,7 +32,21 @@ string largestOddNumber(string num)
     return result;
 }
 
+// Optimal approach : TC - O(n) , SC -(1)
+string largestOddNumber(string num)
+{
+    string result = "";
+    for(int i=num.length(); i>=0; i--)
+    {
+        if((num[i] - '0')%2 != 0)
+        {
+            result = num.substr(0 , i+1);
+            break;
+        }
+    }
 
+    return result;
+}
 
 int main()
 {
