@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Brute approach -  TC - O(n^2) , SC - O(1)
 string Prefix(vector<string>& strs)
 {
     int n = strs.size();
@@ -22,6 +23,33 @@ string Prefix(vector<string>& strs)
     }
 
     return prefix;
+}
+
+// Better Appraoch : TC - O(N^2) , SC - O(1)
+string Prefix(vector<string>& strs)
+{
+    int n = strs.size();
+
+    if(n == 0) return " ";
+
+    if(n == 1) return strs[0];
+
+    string result = " ";
+
+    for(int i=0; i<strs[0].size(); i++)
+    {
+        for(string s : strs)
+        {
+            if(s[i] != strs[0][i]){
+
+                return result;
+            }
+        }
+
+        result += strs[0][i];
+    }
+
+    return result;
 }
 
 int main()
