@@ -52,6 +52,39 @@ string Prefix(vector<string>& strs)
     return result;
 }
 
+
+string commonPrefix(string left, string right)
+{
+    int mini = min(left.length() , right.length());
+
+    for(int i=0; i<mini; i++)
+    {
+        if(left[i] != right[i]) return left.substr(0 , i);
+    }
+
+    return left.substr(0, mini);
+}
+
+string longestCommonPrefix(vector<string>& strs, int l, int r)
+{
+        // only 1 string is present
+    if(l == r){
+         return strs[l];
+    }
+        // for multiple string
+    else{
+        int mid = (l + r)/2;
+        string lcpleft = longestCommonPrefix(strs, l, mid);
+        string lcpright = longestCommonPrefix(strs, mid+1, r);
+        return commonPrefix(lcpleft, lcpright);
+    }
+}
+string longestCommonPrefix(vector<string>& strs) 
+{
+    if(strs.size() == 0) return "";
+    return longestCommonPrefix(strs, 0, strs.size()-1);
+}
+
 int main()
 {
     int n;
@@ -68,7 +101,7 @@ int main()
 
     }
 
-    string ans = Prefix(strs);
+    string ans = longestCommonPrefix(strs);
 
     if(ans.empty()){
         cout<<"\" \""<<endl;
