@@ -85,6 +85,47 @@ string longestCommonPrefix(vector<string>& strs)
     return longestCommonPrefix(strs, 0, strs.size()-1);
 }
 
+// Optimal approach 2 : TC -O(nlogn), SC O(1)
+bool isCommonPrefix(vector<string> &strs, int length)
+{
+    string str1 = strs[0].substr(0 , length);
+
+    for(int i=1; i<strs.size(); i++)
+    {
+        if(strs[i].find(str1) != 0) return false;
+    }
+    return true;
+}
+
+string longestCommonPrefix(vector<string> &strs)
+{
+    if(strs.size() == 0) return " ";
+
+    int minLength = INT_MAX;
+    for(string str : strs)
+    {
+        minLength = min(minLength , (int)str.length());
+    }
+
+    int low = 0;
+    int high = minLength;
+
+    while(low <= high)
+    {
+        int mid = (low + high)/2;
+
+        if(isCommonPrefix(strs, mid))
+        {
+            low = mid+1;
+        }else{
+            high = mid-1;
+        }
+    }
+
+    return strs[0].substr(0, (low + high)/2);
+
+}
+
 int main()
 {
     int n;
