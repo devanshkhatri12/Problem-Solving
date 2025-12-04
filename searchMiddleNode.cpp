@@ -64,19 +64,34 @@ listNode* findMiddle(listNode* &head)
 
 }
 
+// Optimal approach : TC - O(n/2) , SC - O(1)
+listNode* findMiddle(listNode* &head)
+{
+    listNode* slow = head;
+    listNode* fast = head;
+
+    while(fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
 int main()
 {
-    listNode* node = new listNode(10);
+    listNode* node = new listNode(20);
 
     listNode* head = node;
 
     cout<<"Inserting nodes"<<endl;
 
-    insertNode(head, 11);
-    insertNode(head, 12);
-    insertNode(head, 13);
-    insertNode(head, 14);
-    // insertNode(head, 15);
+    insertNode(head, 21);
+    insertNode(head, 22);
+    insertNode(head, 23);
+    insertNode(head, 24);
+    insertNode(head, 25);
     print(head);
 
     listNode* temp = findMiddle(head);
