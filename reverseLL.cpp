@@ -58,6 +58,23 @@ Node* reverseLinkedList(Node* &head)
     return head;
 }
 
+// Better approach : TC - O(n) , SC - O(1)
+Node* reverseLinkedList(Node* &head)
+{
+    Node* temp = head;
+    Node* prev = NULL;
+
+    while(temp != NULL)
+    {
+        Node* front = temp->next;
+        temp->next = prev;
+        prev = temp;
+        temp = front;
+    }
+
+    return prev;
+
+}
 
 
 int main()
