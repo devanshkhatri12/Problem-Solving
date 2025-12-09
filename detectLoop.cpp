@@ -43,6 +43,25 @@ bool detectCycle(Node* &head)
     return false;
 }
 
+// Optimal apporach - (tortoise and Head algorithm) : TC - O(N/2) , SC - O(1)
+bool detectCycle(Node* &head)
+{
+    Node* slow = head;
+    Node* fast = head;
+    
+    while(fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if(fast == slow){
+            return true;
+        }
+    }
+
+    return false;
+}
+
 int main()
 {
     Node* head = new Node(1);
