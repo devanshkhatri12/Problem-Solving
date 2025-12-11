@@ -43,6 +43,34 @@ Node* startingNode(Node* &head)
     return NULL;
 }
 
+// Optimal approach : TC - O(n/2 * l1) , SC - O(1)
+Node* startingNode(Node* &head)
+{
+    Node* slow = head;
+    Node* fast = head;
+
+    while(fast->next != NULL && fast != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if(slow == fast)
+        {
+            slow = head;
+
+            while(slow != fast)
+            {
+                slow = slow->next;
+                fast = fast->next;
+            }
+
+            return slow;
+        }
+    }
+
+    return NULL;
+}
+
 
 int main()
 {
