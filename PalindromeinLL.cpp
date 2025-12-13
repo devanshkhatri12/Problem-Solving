@@ -50,6 +50,66 @@ bool checkPalindrome(Node* &head)
     return true;
 }
 
+Node* reverseLinkedList(Node* &head)
+{
+    // base case:
+    if(head->next == NULL || head == NULL)
+    {
+        return head;
+    }
+
+    Node* newHead = reverseLinkedList(head->next);
+    Node* front = head->next;
+    front->next = head;
+    head->next = NULL;
+
+    return newHead;
+}
+
+// Optimal approach : TC - O(2n) , SC - O(1)
+bool checkPalindrome(Node* &head)
+{
+    // base case
+    if(head->next == NULL || head == NULL)
+    {
+        return head;
+    }
+
+    Node* slow = head;
+    Node* fast = head;
+
+    // step - 1 : find middle of LL
+    while(fast->next != NULL && fast->next->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    // step - 2 : reverse second half
+    Node* newHead = reverseLinkedList(slow->next);
+
+    // step - 3 : take two pointers check and check palindrome
+    Node* first = head;
+    Node* second = newHead;
+
+    while(second != NULL)
+    {
+        if(first->data != second->data){
+
+            reverseLinkedList(newHead);
+            return false;
+        }
+
+        first = first->next;
+        second = second->next;
+
+    }
+
+    reverseLinkedList(newHead);
+    return true;
+
+}
+
 int main()
 {
     Node* node = new Node(10);
