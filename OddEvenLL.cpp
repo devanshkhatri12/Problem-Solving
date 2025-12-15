@@ -77,6 +77,26 @@ Node* oddEven(Node* &head)
 
 }
 
+// Optimal approach :  TC - O(n) , SC - O(1)
+Node* oddEven(Node* &head)
+{
+    Node* odd = head;
+    Node* even = head;
+    Node* evenHead = head->next;
+
+    while(even != NULL && even->next != NULL)
+    {
+        odd->next = even->next;
+        odd = odd->next;
+
+        even->next = odd->next;
+        even = even->next;
+    }
+    odd->next = evenHead;
+
+    return head;
+}
+
 int main()
 {
     Node* node = new Node(10);
