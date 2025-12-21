@@ -33,6 +33,31 @@ void printNode(node* &head)
     cout<<endl;
 }
 
+// Optimal approach (skip Ist step of slow): TC - O(n/2) , SC - O(1)
+node* deleteNode(node* &head, int n)
+{
+    if(head == NULL || head->next == NULL){
+        return NULL;
+    }
+    
+    node* slow = head;
+    node* fast = head;
+
+    fast->next = fast->next->next;
+
+    while(fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    node* deleteNode = slow->next;
+    slow->next = slow->next->next;
+    delete deleteNode;
+
+    return head;
+}
+
 // Brute approach : TC - O(2 * length) , SC - O(1)
 node* deleteNode(node* &head, int n)
 {
