@@ -61,6 +61,74 @@ Node* sortLL(Node* &head)
     return head;
 }
 
+
+    Node* mergeLL(Node* list1, Node* list2) {
+        
+        Node* dummyNode = new Node(-1);
+        
+        
+        Node* temp = dummyNode;
+
+        
+        while (list1 != nullptr && list2 != nullptr) {
+           
+            if (list1->data <= list2->data) {
+                temp->next = list1;
+                list1 = list1->next;
+            } else {
+                temp->next = list2;
+                list2 = list2->next;
+            }
+            
+            temp = temp->next;
+        }
+
+        
+        if (list1 != nullptr) {
+            temp->next = list1;
+        } else {
+            temp->next = list2;
+        }
+
+        return dummyNode->next;
+    }
+
+Node* findMiddle(Node* &head)
+{
+    Node* slow = head;
+    Node* fast = head->next;
+
+    while(fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+// Optimal approach : TC - O(n logn) , SC - O(n)[bcz of reverse stack]
+Node* sortLL(Node* &head)
+{
+    if(head == NULL || head->next == NULL){
+        return head;
+    }
+
+    Node* middleNode = findMiddle(head);
+
+        Node* right = middleNode->next;
+        middleNode->next = nullptr;
+        Node* left = head;
+
+        // Recursively sort both halves
+        left = sortLL(left);
+        right = sortLL(right);
+
+
+    return mergeLL(left ,  right);
+    
+}
+
 int main()
 {
     Node* node = new Node(101);
