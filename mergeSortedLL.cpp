@@ -63,7 +63,38 @@ node* convert(vector<int>& list)
     return head;
 }
 
-// Brute approach : TC - O(2 * (n * m)  +  logn) , SC - O(n * m)
+
+// Optimal approach : TC - O(n + m) , Sc - O(1)
+node* mergeSortedLists(node* &head1, node* head2)
+{
+    node* list1 = head1;
+    node* list2 = head2;
+
+    node* dummyNode = new node(-1);
+    node* temp = dummyNode;
+
+    while(list1 != nullptr && list2 != nullptr)
+    {
+        if(list1->data <= list2->data)
+        {
+            temp->next = list1;
+            temp = list1;
+            list1 = list1->next;
+        }else{
+            temp->next = list2;
+            temp = list2;
+            list2 = list2->next;
+        }
+
+    }   
+
+    if(list1) temp->next = list1;
+    else temp->next = list2;
+
+    return dummyNode->next;
+}
+
+// Brute approach : TC - O(2 * (n + m)  +  logn) , SC - O(n * m)
 node* mergeSortedLists(node* &head1, node* head2)
 {
     vector<int> list;
