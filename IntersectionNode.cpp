@@ -150,6 +150,54 @@ node* intersectionPoint(node* &headA, node* &headB)
 
     
 }
+int getDifference(node* listA, node* listB)
+{
+    int n1 = 0 , n2 = 0;
+    while(listA != nullptr || listB != nullptr)
+    {
+        if(listA == nullptr)
+        {
+            ++n1;
+            listA = listA->next;
+        }
+
+        if(listB == nullptr)
+        {
+            ++n2;
+            listB = listB->next;
+        }
+
+    }
+
+    return n1 - n2;
+}
+
+// way - II
+node* intersectionPoint(node* headA, node* headB)
+{
+    node* t1 = headA;
+    node* t2 = headB;
+
+    int diff = getDifference(headA, headB);
+
+    if(diff < 0)
+    {
+        while(diff++ != 0) t2 = t2->next;
+    }else{
+        while(diff-- != 0) t1 = t1->next;
+    }
+
+    while(t1 != nullptr)
+    {
+        if(t1 == t2) return t1;
+
+        t1 = t1->next;
+        t2 = t2->next;
+    }
+
+    return t1;
+
+}
 
 
 void createIntersection(node* headA, node* headB, int pos) {
