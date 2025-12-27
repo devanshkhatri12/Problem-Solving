@@ -72,6 +72,34 @@ node* intersectionPoint(node* &headA, node* &headB)
     return nullptr;
 }
 
+// Better approach : TC - O(2n) , SC - O(n);
+node* intersectionPoint(node* &headA, node* &headB)
+{
+    node* tempA = headA;
+    node* tempB = headB;
+
+    unordered_map<node* , int> mp;
+
+    while(tempA != nullptr)
+    {
+        mp[tempA] = 1;
+        tempA = tempA->next;
+    }
+
+    while(tempB != nullptr)
+    {
+        if(mp.find(tempB) != mp.end())
+        {
+            return tempB;
+            break;
+        }
+
+        tempB = tempB->next;
+    }
+
+    return nullptr;
+}
+
 void createIntersection(node* headA, node* headB, int pos) {
     if (pos <= 0) return;
 
