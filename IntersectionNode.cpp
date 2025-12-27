@@ -100,6 +100,58 @@ node* intersectionPoint(node* &headA, node* &headB)
     return nullptr;
 }
 
+node* convert(node* listA, node* listB, int d)
+{
+    node* t1 = listA;
+    node* t2 = listB;
+
+    while(d)
+    {
+        d--;
+        t2 = t2->next;
+    }
+
+    while(t1 != t2)
+    {
+
+        t1 = t1->next;
+        t2 = t2->next;
+    }
+
+    return t1;
+}
+
+// Optimal approach (method -1): TC - O(n1 + 2n2) , SC - O(1)
+// way - I
+node* intersectionPoint(node* &headA, node* &headB)
+{
+    int n1 = 0, n2 = 0;
+    node* tempA = headA;
+    node* tempB = headB;
+
+    while(tempA != nullptr)
+    {
+        n1++;
+        tempA = tempA->next;
+    }
+
+    while(tempB != nullptr)
+    {
+        n2++;
+        tempB =tempB->next;
+    }
+
+    if(n1 < n2)
+    {
+        return convert(headA , headB, n2-n1);
+    }else{
+        return convert(headB , headA, n1-n2);
+    }
+
+    
+}
+
+
 void createIntersection(node* headA, node* headB, int pos) {
     if (pos <= 0) return;
 
