@@ -220,6 +220,21 @@ node* intersectionPoint(node* headA , node* headB)
     return l1;
 }
 
+// Optimal approach (method - 2): TC - O(2 max(N1 , N2)) , SC - O(1)
+// way - II
+node* intersectionPoint(node* headA , node* headB)
+{
+    node* l1 = headA;
+    node* l2 = headB;
+
+    while(l1 != l2)
+    {
+        l1 = l1 == nullptr ? headB : l1->next;
+        l2 = l2 == nullptr ? headA : l2->next;
+    }
+
+    return l1;
+}
 
 void createIntersection(node* headA, node* headB, int pos) {
     if (pos <= 0) return;
