@@ -87,6 +87,7 @@ node* convert(vector<int> &list)
     return head;
 }
 
+// Brute approach : TC - O(2 * (n*m) + nlogn) , SC - O(n*m)
 node* flattening(node* &head)
 {
     node* t1 = head;
@@ -109,6 +110,49 @@ node* flattening(node* &head)
 
     return newHead;
 }
+
+node* mergeList(node* listA , node* listB)
+{
+    node* dummyNode = new node(-1);
+    node* result = dummyNode;
+
+
+    while(listA != nullptr && listB != nullptr)
+    {
+        if(listA->data < listB->data)
+        {
+            result->child = listA;
+            result = listA;
+            listA = listA->child;
+        }else{
+            result->child = listB;
+            result = listB;
+            listB = listB->child;
+        }
+
+        result->next = nullptr;
+    }
+
+
+    if(listA) result->child = listA;
+    else   result->child = listB;
+
+    return dummyNode->child;
+}
+
+// Optimal approach : TC - O(2NM) , SC - O(N)[recursive stack memory]
+node* flattening(node* &head)
+{
+    // base case
+    if(head == nullptr || head->next == nullptr){
+        return head;
+    }
+
+    node* mergeHead = flattening(head->next);
+
+    return mergeList(head, mergeHead);
+}
+
 
 int main()
 {
