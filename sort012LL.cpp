@@ -124,6 +124,61 @@ node* sort012(node* &head)
     return head;
 }
 
+// Optimal approach : TC - O(n) , SC - O(1);
+node* sort012(node* &head)
+{
+    node* t1 = head;
+
+    node* zeroNode = new node(-1);
+    node* zero = zeroNode;
+
+    node* oneNode = new node(-1);
+    node* one = oneNode;
+
+    node* twoNode = new node(-1);
+    node* two = twoNode;
+
+    if(head == nullptr || head->next == nullptr)
+    {
+        return head;
+    }
+
+    while(t1 != nullptr)
+    {
+        node* newNode= t1->next;
+        t1->next = nullptr;
+
+        if(t1->data == 0)
+        {
+            zero->next = t1;
+            zero = zero->next;
+
+        }else if(t1->data == 1){
+            one->next = t1;
+            one = one->next;
+        }else{
+            two->next = t1;
+            two = two->next;
+        }
+
+        t1 = newNode;
+    }
+
+    zero->next = (oneNode->next) ? oneNode->next : twoNode->next;
+    one->next = twoNode->next;
+    two->next = nullptr;
+
+    head = zeroNode->next;
+
+    delete zeroNode;
+    delete oneNode;
+    delete twoNode;
+
+    return head;
+
+
+}
+
 int main()
 {
     cout<<"enter Elements"<<endl;
