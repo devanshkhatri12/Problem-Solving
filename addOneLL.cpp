@@ -99,6 +99,33 @@ node* addOne(node* &head)
 
 }
 
+int helper(node* &head)
+{
+    node* temp = head;
+    if(temp == nullptr) return 1;
+
+    int carry = helper(temp->next);
+    temp->data = temp->data + carry;
+
+    if(temp->data < 10) return 0;
+
+    temp->data = 0;
+    return 1;
+}
+
+// Optimal approach : TC - O(N) , SC - O(N)
+node* addOne(node* &head)
+{
+    int carry = helper(head);
+    if(carry == 1){
+        node* newNode = new node(1);
+        newNode->next = head;
+        return newNode;
+    }
+
+    return head;
+}
+
 int main()
 {
     cout<<"enter input elements"<<endl;
