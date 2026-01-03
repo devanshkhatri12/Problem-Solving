@@ -94,6 +94,68 @@ node* reverseKnodes(node* &head, int k)
     
 }
 
+node* reverseList(node* &list)
+{
+    if(list == nullptr || list->next == nullptr) return list;
+
+    
+    node* newNode = reverseList(list->next);
+
+    node* frontNode = list->next;
+    frontNode->next = list;
+    list->next = nullptr;
+
+    return newNode;
+
+}
+
+node* findKthNode(node* &list, int k)
+{
+    k -= 1;
+    node* temp = list;
+    while(temp != nullptr && k>0)
+    {
+        k--;
+        temp = temp->next;
+    }
+    return temp;
+
+}
+// Optimal approach : TC - O(2N) , SC - O(1)
+node* reverseKnodes(node* &head, int k)
+{
+    node* temp = head;
+    node* prevNode = nullptr;
+
+    while(temp != nullptr)
+    {
+        node* Kthnode = findKthNode(temp, k);
+        if(Kthnode == nullptr)
+        {
+            if(prevNode) return prevNode->next = temp;
+            break;
+        }
+
+        node* nextNode = Kthnode->next;
+        Kthnode->next = nullptr;
+
+        reverseList(temp);
+
+        // in first group
+        if(temp == head)
+        {
+            head = Kthnode;
+        }else{
+            prevNode->next = Kthnode;
+        }
+
+        prevNode = temp;
+        temp = nextNode;
+    }
+
+    return head;
+}
+
 int main()
 {
     int k;
@@ -107,9 +169,9 @@ int main()
     cout<<"List before reversing k-nodes"<<endl;
     printList(head);
 
-    node* newHead = reverseKnodes(head, k);
+    reverseKnodes(head, k);
 
     cout<<"List after reversing k-nodes"<<endl;
-    printList(newHead);
+    printList(head);
 
 }
