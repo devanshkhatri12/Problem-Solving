@@ -55,7 +55,7 @@ node* takeInput()
 
 
 // Brute approach : TC - O(3N) , sc - O(N)
-node* rotateRight(node* head, int k)
+    node* rotateRight(node* head, int k)
     {
 
         node* temp = head;
@@ -89,6 +89,47 @@ node* rotateRight(node* head, int k)
 
         return head;
     }
+
+node* lastNode(node* temp, int l)
+{
+    if(temp == nullptr || l <= 0) return nullptr;
+
+    int count = 1;
+    while(temp != nullptr)
+    {
+        if(count == l) return temp;
+        
+        temp = temp->next;
+        count++;
+    }
+    return nullptr;
+}
+
+// Optimal approach : TC - O(2N) , SC - O(1)
+node* rotateRight(node* &head, int k)
+{
+    node* tail = head;
+    int len = 1;           // we don't go the nullptr that why we keep the length initiliaze with 1
+
+
+    while(tail->next != nullptr)
+    {
+        tail = tail->next;
+        len++;
+    }
+
+    if(k % len == 0) return head;
+
+    k = k % len;
+
+    tail->next = head;
+    node* newLastNode = lastNode(head, len-k);
+    head = newLastNode->next;
+    newLastNode->next = nullptr;
+
+    return head;
+
+}
 
 int main()
 {
