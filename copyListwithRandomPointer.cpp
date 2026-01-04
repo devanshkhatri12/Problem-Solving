@@ -55,6 +55,7 @@ node* takeInput()
     return head;
 }
 
+// Brute approach : TC - O(2N) , SC - O(2N)
 node* copyList(node* &head)
 {
     node* temp = head;
@@ -82,6 +83,56 @@ node* copyList(node* &head)
     }
 
     return mp[head];
+}
+
+
+// Optimal status : TC - O(2N) , SC - O(N)
+node* copyList(node* &head)
+{
+    node* temp = head;
+
+    // first create node in middle  and insert values
+    while(temp != nullptr)
+    {
+        node* nextElement = temp->next;
+        node* copyNode = new node(temp->data);
+        copyNode->next = nextElement;
+        temp->next = copyNode;
+
+        temp = nextElement;
+    }
+
+    // second copy random pointer 
+    temp = head;
+    while(temp != nullptr)
+    {
+        node* copyNode = temp->next;
+        if(temp->random)
+        {
+            copyNode->random = temp->random->next;   
+        }else{
+            copyNode->random = nullptr;
+        }
+
+        temp = temp->next->next;
+    }
+
+    // copy next pointer
+    temp = head;
+    node* dummyNode = new node(-1);
+    node* result = dummyNode;
+    while(temp != nullptr)
+    {
+        // creating new LL
+        result->next = temp->next;
+        result = result->next;
+
+        // disconnect and going back to initial state of LL
+        temp->next = temp->next->next;
+        temp = temp->next;
+    }
+
+    return dummyNode->next;
 }
 
 int main()
