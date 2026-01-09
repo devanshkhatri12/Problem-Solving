@@ -8,7 +8,7 @@ double power(double x, int n)
     return ans;
 }
 
-// // Better approach : TC - O(N) , SC - O(1)
+// Better approach : TC - O(N) , SC - O(1)
 double power(double x, int n)
 {
     double ans = 1;
