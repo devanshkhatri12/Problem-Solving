@@ -2,14 +2,14 @@
 using namespace std;
 
 // Brute approach : using stl function
-void power(double x, int n)
+double power(double x, int n)
 {
     double ans = pow(x,n);
-    cout<<"Power of x^n is: "<<ans<<setprecision(4)<<endl;
+    return ans;
 }
 
-// Better approach : TC - O(N) , SC - O(1)
-void power(double x, int n)
+// // Better approach : TC - O(N) , SC - O(1)
+double power(double x, int n)
 {
     double ans = 1;
 
@@ -29,7 +29,21 @@ void power(double x, int n)
         ans *= x;
     }
 
-    cout<<"Power of x^n is: "<<ans<<endl;
+    return ans;
+}
+
+// Optimal approach : recursive method : TC - O(logn) , SC - O(logn)[recursive stack]
+double power(double x, int n)
+{
+    // base case
+    if(n == 0) return 1;
+    if(n == 1) return x;
+
+    if(n % 2 == 0){
+        return power(x*x, n/2);         // i.e 2^10 = (2 * 2)^5
+    }
+
+    return x*power(x, n-1);             // i.e 2^5 = 2 * 2^4
 }
 
 int main()
@@ -42,7 +56,9 @@ int main()
     cout<<"enter exponent: ";
     cin>>n;
 
-    power(x,n);
+    double ans = power(x,n);
+
+    cout<<"Power of x^n is: "<<ans<<endl;
 
     return 0;
 }
