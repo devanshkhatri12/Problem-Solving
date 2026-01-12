@@ -32,6 +32,7 @@ double power(double x, int n)
     return ans;
 }
 
+// not compatible for negative n
 // Optimal approach : recursive method : TC - O(logn) , SC - O(logn)[recursive stack]
 double power(double x, int n)
 {
@@ -46,14 +47,41 @@ double power(double x, int n)
     return x*power(x, n-1);             // i.e 2^5 = 2 * 2^4
 }
 
+double helper(double x, long long n)
+{
+    if(n == 0) return 1;
+    if(n == 1) return x;
+
+    if(n % 2 == 0)
+    {
+        return helper(x*x, n/2);
+    }
+
+    return x * helper(x, n-1);
+}
+
+// working for all the edge case
+// Optimal approach : TC - O(logn) , SC - O(logn)
+double power(double x, int n)
+{
+    long long num = n;
+
+    if(n < 0)
+    {
+        return (1.0 / helper(x, -num));
+    }
+
+    return helper(x, num);
+}
+
 int main()
 {
     double x;
-    cout<<"enter number: ";
+    cout<<"enter number x: ";
     cin>>x;
 
     int n;
-    cout<<"enter exponent: ";
+    cout<<"enter exponent n: ";
     cin>>n;
 
     double ans = power(x,n);
