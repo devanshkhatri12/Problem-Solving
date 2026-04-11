@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Brute approach: TC - O(n3) , SC - 2 * O(no of triplets)
 vector<vector<int>> Sum(vector<int>& num){
     int n = num.size();
     set<vector<int>> st;
@@ -39,6 +40,7 @@ int main()
 
     vector<vector<int>> ans = Sum(num);
 
+    cout<<"Triplets are"<<endl;
     for(int i=0; i<ans.size(); i++)
     {
         for(int j=0; j<ans[i].size(); j++)
