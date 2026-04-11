@@ -25,6 +25,30 @@ vector<vector<int>> Sum(vector<int>& num){
 
 }
 
+// Better approach: TC - O(n2) * O(logn) , SC - O(N)
+vector<vector<int>> Sum(vector<int>& num)
+{
+    int n = num.size();
+    set<vector<int>> st;
+
+    for(int i=0; i<n; i++)
+    {
+        set<int> hashSet;
+        for(int j=i+1; j<n; j++)
+        {
+            int third =  - (num[i] + num[j]);
+            if(hashSet.find(third) != hashSet.end()){
+                vector<int>temp = {num[i] , num[j], third};
+                sort(temp.begin() , temp.end());
+                st.insert(temp);
+            }
+            hashSet.insert(num[j]);
+        }
+    }
+
+    return vector<vector<int>>(st.begin() , st.end());
+}
+
 int main()
 {
     int n=6;
@@ -50,6 +74,5 @@ int main()
     }
 
     return 0;
-
 
 }
