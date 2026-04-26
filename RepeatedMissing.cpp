@@ -58,6 +58,33 @@ vector<int> repeatMiss(vector<int>& num)
     return {repeat, missed};
 }
 
+// Optimal approach : TC - O(n) , SC - O(1)
+vector<int> repeatMiss(vector<int>& num)
+{
+    int n = num.size();
+
+    long long Sn = (n * (n+1))/2;
+    long long Sn2 = (n * (n+1) * (2*n + 1))/6;
+
+    long long S = 0, S2 = 0;
+
+    for(int i=0;i<n;i++)
+    {
+        S += num[i];
+        S2 += (long long)num[i] * (long long)num[i];
+    }
+
+    long long val1 = S - Sn;
+    long long val2 = S2 - Sn2;
+
+    val2 = val2/val1;
+
+    long long repeat = (val1 + val2)/2;
+    long long missed = (repeat - val1);
+
+    return {(int)repeat, (int)missed};
+}
+
 int main()
 {
 
