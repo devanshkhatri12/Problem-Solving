@@ -28,6 +28,35 @@ vector<int> repeatMiss(vector<int>& num)
     return {repeat , missed};
 }
 
+// Better approach: TC - O(2n) , SC - O(n)
+vector<int> repeatMiss(vector<int>& num)
+{
+    int n = num.size();
+    vector<int> hashArr(n+1, 0);
+
+    for(int i=0;i<n;i++)
+    {
+        hashArr[num[i]]++;
+    }
+
+    int repeat = -1, missed = -1;
+    for(int i=1;i<=hashArr.size();i++)
+    {
+        if(hashArr[i] == 2){
+            repeat = i;
+        }
+
+        if(hashArr[i] == 0){
+            missed = i;
+        }
+
+        if(repeat != -1 && missed != -1){
+            break;
+        }
+    }
+
+    return {repeat, missed};
+}
 
 int main()
 {
